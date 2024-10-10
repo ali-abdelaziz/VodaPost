@@ -1,0 +1,22 @@
+.navbar {
+  background-image: linear-gradient(to right top, #900, #e60000);
+  padding: 10px;
+  a {
+    color: #ffffff;
+  }
+  a:hover {
+    color: #ebe6e6;
+  }
+
+  & .dropdown-menu {
+    background-image: linear-gradient(to right top, #900, #e60000);
+
+    & .dropdown-item {
+      color: white;
+    }
+
+    & .dropdown-item:hover {
+      background-image: linear-gradient(to right top, #900, #e60000);
+    }
+  }
+}

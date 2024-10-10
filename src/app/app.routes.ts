@@ -9,5 +9,9 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
-  }
+  },
+  {
+    path: 'posts/:id',
+    loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
+  },
 ];
