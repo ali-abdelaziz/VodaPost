@@ -18,11 +18,17 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     // this.getUsers();
 
-    // getting cached users from local storage
+    // getting cached users from http-interceptor
     setInterval(() => {
-      this.getCachedUsers();
+      this.getUsers();
       setInterval;
     }, 3000);
+
+    // getting cached users from local storage
+    // setInterval(() => {
+    //   this.getCachedUsers();
+    //   setInterval;
+    // }, 3000);
   }
 
   getUsers() {
