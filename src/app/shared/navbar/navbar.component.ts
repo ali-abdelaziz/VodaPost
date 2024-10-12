@@ -16,11 +16,23 @@ export class NavbarComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    // this.getUsers();
+
+    // getting cached users from local storage
+    setInterval(() => {
+      this.getCachedUsers();
+      setInterval;
+    }, 3000);
   }
 
   getUsers() {
     this.usersService.getUsers().subscribe((users) => {
+      this.users.set(users);
+    })
+  }
+
+  getCachedUsers() {
+    this.usersService.getCachedUsers().subscribe((users) => {
       this.users.set(users);
     })
   }

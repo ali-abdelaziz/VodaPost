@@ -17,6 +17,7 @@
 
     & .dropdown-item:hover {
       background-image: linear-gradient(to right top, #900, #e60000);
+      transform: scale(1.01);
     }
   }
 }

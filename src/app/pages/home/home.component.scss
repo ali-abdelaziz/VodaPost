@@ -1,16 +1,41 @@
 // Not found image
 :host {
-  .img {
-         width: 20.7rem;
-         height: 20.7rem;
-         object-fit: contain;
+  .card-img-top {
+    transition: all .3s ease-in-out;
 
+    &:hover {
+      transform: scale(1.05);
+      border-radius: 10px !important;
+      padding: 20px;
+    }
+  }
+
+  .comments {
+    color: #fff;
+    background-color: #e60000;
+    border-color: #e60000;
+  }
+
+  .comments:hover {
+    color: #fff;
+    background-color: #900;
+    border-color: #900;
+  }
+
+  .img {
+    width: 20.7rem;
+    height: 20.7rem;
+    object-fit: contain;
   }
 
   .description {
-         text-align: center;
-         font-size: 1.5rem;
-         font-style: normal;
-         color: #900;
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: normal;
+    color: #900;
+  }
+
+  .first-letter::first-letter {
+    text-transform: capitalize;
   }
 }

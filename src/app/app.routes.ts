@@ -14,4 +14,8 @@ export const routes: Routes = [
     path: 'posts/:id',
     loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
   },
+  {
+    path: 'posts/:id/comments/:postId',
+    loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
+  }
 ];

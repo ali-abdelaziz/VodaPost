@@ -4,24 +4,33 @@
 <div class="container m-auto mb-4 row row-cols-1 row-cols-md-2 g-4 d-flex justify-content-center">
   @for (post of userPosts(); track $index) {
   <div class="col">
-    <div class="card h-100">
-      <img src="assets/images/posts/post_bg.jpg" class="card-img-top" alt="Post Image">
+    <div class="card h-auto">
+      <img src="assets/images/posts/post_bg.jpg" class="card-img-top" alt="Post Image" loading="lazy">
       <div class="card-body">
-        <h5 class="card-title">{{post.title}}</h5>
-        <p class="card-text">{{post.body}}</p>
-        <button (click)="viewComments()" class="btn btn-primary mb-3">Comments</button>
-        <div *ngIf="showComments" class="d-flex g-2 align-items-center">
-          <img src="assets/images/posts/post_bg.jpg" alt="commenter image" class="rounded-circle" width="50"
-            height="50">
-          <p>This is a comment ...</p>
+        <!-- @for (user of userData(); track $index) {} -->
+        <div class="d-flex align-items-center mb-2">
+          <img src="assets/images/posts/post_bg.jpg" alt="User Image" class="rounded-circle" width="40"
+              height="40">
+          <h5 class="card-title ms-2 mb-0">{{post.title | titlecase | truncate : 10}}</h5>
         </div>
+
+        <p class="card-text first-letter">{{post.body | truncate : 130}}</p>
+        <button (click)="showPostComments(post.id)" class="comments btn btn-primary mb-3">Comments</button>
+        <!-- Comments -->
+        @for (comment of postComments(); track $index) {
+          <div *ngIf="comment.postId == post.id" class="d-flex align-items-center mb-2">
+            <img src="assets/images/posts/post_bg.jpg" alt="Commenter Image" class="rounded-circle" width="40"
+              height="40">
+            <p class="first-letter ms-2 mb-0 fw-normal text-body-secondary fs-6">{{comment.name}}</p>
+          </div>
+        }
       </div>
     </div>
   </div>
+  <!-- Empty State -->
   } @empty {
   <div class="d-flex justify-content-center align-items-center flex-column z-n1 ">
     <img src="assets/images/photos/not-found search.png" class="img" alt="" srcset="">
-
     <span class="description fs-3 fw-bold">No Posts Found!</span>
     <span class="description text-muted fs-6 fw-bold">Please select a user.</span>
   </div>
