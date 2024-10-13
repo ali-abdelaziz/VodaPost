@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   postComments: WritableSignal<any> = signal<any>([]);
   userId: number;
   postId: number;
-  // userData: WritableSignal<User[]> = signal<User[]>([]);
 
   constructor(
     private usersService: UsersService,
@@ -29,39 +28,28 @@ export class HomeComponent implements OnInit {
     this.postId = this.route.snapshot.params['postId'];
    }
   ngOnInit(): void {
-    // this.userId = this.route.snapshot.params['id'];
-    this.postId = this.route.snapshot.params['postId'];
-    this.getUserPosts(this.userId);
-    // this.getPostComments(this.postId);
+    this.getCachedUserPosts(this.userId);
   }
 
-  getUserPosts(userId: number) {
-    this.usersService.getUserPosts(userId)
+  // getting cached userPosts from local storage
+  getCachedUserPosts(userId: number) {
+    this.usersService.getCachedUserPosts(userId)
     .subscribe((posts) => {
       this.userPosts.set(posts);
     })
   }
 
-  // getUserData() {
-  //   this.usersService.getUsers()
-  //   .subscribe((users) => {
-  //     this.userData.set(users);
-  //   })
-  // }
-
-  getPostComments(postId: number) {
-    this.showComments = !this.showComments;
-    this.usersService.getPostComments(postId)
+  // getting cached postComments from local storage
+  getCachedPostComments(postId: number) {
+    this.usersService.getCachedPostComments(postId)
     .subscribe((comments) => {
-      console.log("comments", comments);
       this.postComments.set(comments);
-      console.log("comments", this.postComments());
     })
   }
 
   showPostComments(postId: number) {
     this.showComments = !this.showComments;
-    this.getPostComments(postId);
+    this.getCachedPostComments(postId);
   }
 
 }

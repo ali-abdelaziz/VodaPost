@@ -12,19 +12,9 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers() {
-    return this.http.get<User[]>(this.apiUrl + 'users');
-  }
-
-  getUserPosts(userId: number) {
-    return this.http.get(this.apiUrl + 'posts?userId=' + userId);
-  }
-
-  getPostComments(postId: number) {
-    return this.http.get(this.apiUrl + 'comments?postId=' + postId);
-  }
-
   // Caching data with local storage
+
+  // caching users
   getCachedUsers() {
     const cachedUsers = localStorage.getItem('cachedUsers');
     if (!cachedUsers) {
@@ -36,7 +26,39 @@ export class UsersService {
         })
       );
     }
-    console.log('cache hit');
+    // console.log('cache hit');
     return of(JSON.parse(localStorage.getItem('cachedUsers')!));
   }
+
+    // caching user posts
+    getCachedUserPosts(userId: number) {
+      const cachedUserPosts = localStorage.getItem('cachedUserPosts' + userId);
+      if (!cachedUserPosts) {
+        console.log('cache miss');
+        return this.http.get(this.apiUrl + 'posts?userId=' + userId)
+        .pipe(
+          tap((posts) => {
+            localStorage.setItem('cachedUserPosts' + userId, JSON.stringify(posts));
+          })
+        );
+      }
+      // console.log('cache hit');
+      return of(JSON.parse(localStorage.getItem('cachedUserPosts' + userId)!));
+    }
+
+    // caching post comments
+    getCachedPostComments(postId: number) {
+      const cachedPostComments = localStorage.getItem('cachedPostComments' + postId);
+      if (!cachedPostComments) {
+        console.log('cache miss');
+        return this.http.get(this.apiUrl + 'comments?postId=' + postId)
+        .pipe(
+          tap((comments) => {
+            localStorage.setItem('cachedPostComments' + postId, JSON.stringify(comments));
+          })
+        );
+      }
+      // console.log('cache hit');
+      return of(JSON.parse(localStorage.getItem('cachedPostComments' + postId)!));
+    }
 }
