@@ -9,6 +9,7 @@ import { of, tap } from 'rxjs';
 })
 export class UsersService {
   apiUrl = environment.api;
+  userPosts: WritableSignal<any> = signal<any>([]);
 
   constructor(private http: HttpClient) {}
 
@@ -33,7 +34,8 @@ export class UsersService {
     // caching user posts
     getCachedUserPosts(userId: number) {
       const cachedUserPosts = localStorage.getItem('cachedUserPosts' + userId);
-      if (!cachedUserPosts) {
+      console.log(cachedUserPosts);
+      // if (!cachedUserPosts) {
         console.log('cache miss');
         return this.http.get(this.apiUrl + 'posts?userId=' + userId)
         .pipe(
@@ -41,7 +43,7 @@ export class UsersService {
             localStorage.setItem('cachedUserPosts' + userId, JSON.stringify(posts));
           })
         );
-      }
+      // }
       // console.log('cache hit');
       return of(JSON.parse(localStorage.getItem('cachedUserPosts' + userId)!));
     }

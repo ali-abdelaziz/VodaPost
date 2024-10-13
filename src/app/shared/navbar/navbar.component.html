@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container d-flex justify-content-between">
-    <a class="navbar-brand" routerLink="/home">VodaPost</a>
+    <a class="navbar-brand" routerLink="/">VodaPost</a>
     <button class="navbar-toggler text-white bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,8 +13,8 @@
           </a>
           <ul class="dropdown-menu">
             @for (user of users(); track $index) {
-            <li routerLink="/posts/{{user.id}}">
-              <a class="dropdown-item">{{user.name}}</a>
+            <li routerLink="/posts/{{user?.id}}">
+              <a class="dropdown-item">{{user?.name}}</a>
             </li>
             }
           </ul>
