@@ -3,18 +3,32 @@ import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user.model';
 import { RouterModule } from '@angular/router';
 import { SpinnerService } from '../services/spinner.service';
+import { TranslationService } from '../services/translation.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { languages } from '../../data';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, TranslateModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
   users: WritableSignal<User[]> = signal<User[]>([]);
+  languages = languages;
+  isEnglish: boolean = true;
 
-  constructor(private usersService: UsersService, private spinnerService: SpinnerService) { }
+  constructor(
+    private usersService: UsersService,
+    private spinnerService: SpinnerService,
+    private translationService: TranslationService,
+    translateService: TranslateService
+  ) {
+    translateService.setDefaultLang('en');
+    // translateService.use('en');
+   }
 
   ngOnInit(): void {
 
@@ -37,6 +51,11 @@ export class NavbarComponent implements OnInit {
       this.spinnerService.idle();
       this.users.set(users);
     })
+  }
+
+  changeLanguage(lang: string) {
+    this.translationService.changeLang(lang);
+    this.isEnglish = lang === 'en';
   }
 
 }
