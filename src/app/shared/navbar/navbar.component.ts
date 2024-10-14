@@ -55,8 +55,10 @@ export class NavbarComponent implements OnInit {
   }
 
   changeLanguage(lang: string) {
+    this.spinnerService.busy();
     this.translationService.changeLang(lang);
     this.isEnglish = lang === 'en';
+    this.spinnerService.idle();
   }
 
 }
