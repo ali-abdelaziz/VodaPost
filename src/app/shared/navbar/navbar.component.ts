@@ -48,8 +48,9 @@ export class NavbarComponent implements OnInit {
   // getting cached users from local storage
   getCachedUsers() {
     this.usersService.getCachedUsers().subscribe((users) => {
-      this.spinnerService.idle();
+      this.spinnerService.busy();
       this.users.set(users);
+      this.spinnerService.idle();
     })
   }
 

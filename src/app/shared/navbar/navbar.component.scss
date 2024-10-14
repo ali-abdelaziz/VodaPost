@@ -20,4 +20,10 @@
       transform: scale(1.01);
     }
   }
+
+  @media screen and (max-width: 576px) {
+    .dropdown-menu {
+      position: absolute;
+    }
+  }
 }

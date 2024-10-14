@@ -50,8 +50,9 @@ export class HomeComponent implements OnInit {
     if (userId) {
     this.usersService.getCachedUserPosts(userId)
     .subscribe((posts) => {
-      this.spinnerService.idle();
+      this.spinnerService.busy();
       this.userPosts.set(posts);
+      this.spinnerService.idle();
     })
   }
   }
@@ -60,8 +61,9 @@ export class HomeComponent implements OnInit {
   getCachedPostComments(postId: number) {
     this.usersService.getCachedPostComments(postId)
     .subscribe((comments) => {
-      this.spinnerService.idle();
+      this.spinnerService.busy();
       this.postComments.set(comments);
+      this.spinnerService.idle();
     })
   }
 
