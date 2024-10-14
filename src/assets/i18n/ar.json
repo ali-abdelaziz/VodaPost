@@ -1,5 +1,12 @@
 {
   "Users": {
     "users": "المستخدمين"
+  },
+  "Brand": {
+    "vodaPost": "فودابوست"
+  },
+  "EmptyState": {
+    "noPosts": "!لا يوجد منشورات",
+    "selectUser": ".الرجاء تحديد المستخدم"
   }
 }

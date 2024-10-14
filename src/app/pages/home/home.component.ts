@@ -6,11 +6,12 @@ import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user.model';
 import { SharedModule } from '../../shared/shared.module';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, NavbarComponent, RouterOutlet, CommonModule, SharedModule],
+  imports: [NavbarComponent, NavbarComponent, RouterOutlet, CommonModule, SharedModule, TranslateModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

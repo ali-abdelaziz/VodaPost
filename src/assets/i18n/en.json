@@ -1,5 +1,12 @@
 {
   "Users": {
     "users": "Users"
+  },
+  "Brand": {
+    "vodaPost": "VodaPost"
+  },
+  "EmptyState": {
+    "noPosts": "No Posts Found!",
+    "selectUser": "Please select a user."
   }
 }
