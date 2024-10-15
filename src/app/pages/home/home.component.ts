@@ -43,6 +43,12 @@ export class HomeComponent implements OnInit {
     this.route.params.subscribe((params) => {
       params['id'] ? (this.userId = params['id']) : (this.userId = 1);
       const userPosts = localStorage.getItem('cachedUserPosts' + this.userId);
+      // get userData
+      this.usersService.getCachedUsers().subscribe((users) => {
+      this.userData.set(users.find((user: User) => user.id === this.userId));
+      this.userData.set(users ? users[this.userId - 1] : []);
+      console.log('userData', users ? users[this.userId - 1] : []);
+      });
       userPosts ? JSON.parse(userPosts) : [];
       // if (userPosts?.length) {
       this.getCachedUserPosts(this.userId);

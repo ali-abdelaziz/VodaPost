@@ -7,11 +7,11 @@
     <div class="card h-auto">
       <img src="assets/images/posts/post_bg.jpg" class="card-img-top" alt="Post Image" loading="lazy">
       <div class="card-body">
-        <!-- @for (user of userData(); track $index) {} -->
         <div class="d-flex align-items-center mb-2">
           <img src="assets/images/posts/post_bg.jpg" alt="User Image" class="rounded-circle" width="40"
               height="40">
-          <h5 class="card-title mx-2 mb-0">{{post?.title | titlecase | truncate : 10}}</h5>
+              <!-- <p class="first-letter mx-2 mb-0 fw-normal text-body-secondary fs-6">{{post?.user?.name}}</p> -->
+          <h5 class="card-title mx-2 mb-0">{{userData()?.name | titlecase}}</h5>
         </div>
 
         <p class="card-text first-letter">{{post?.body | truncate : 130}}</p>
