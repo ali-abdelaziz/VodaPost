@@ -21,6 +21,12 @@
     }
   }
 
+  .language:hover {
+    background-color: #900;
+    color: white;
+    border: #900 1px solid;
+  }
+
   @media screen and (max-width: 576px) {
     .dropdown-menu {
       position: absolute;

@@ -34,10 +34,10 @@ export class UsersService {
     // caching user posts
     getCachedUserPosts(userId: number) {
       const cachedUserPosts = localStorage.getItem('cachedUserPosts' + userId);
-      console.log(cachedUserPosts);
-      // if (!cachedUserPosts) {
-        console.log('cache miss');
-        return this.http.get(this.apiUrl + 'posts?userId=' + userId)
+    // console.log("cachedUserPosts",cachedUserPosts);
+    return cachedUserPosts?.length
+        ? of(JSON.parse(cachedUserPosts))
+        : this.http.get(this.apiUrl + 'posts?userId=' + userId)
         .pipe(
           tap((posts) => {
             localStorage.setItem('cachedUserPosts' + userId, JSON.stringify(posts));
@@ -45,7 +45,7 @@ export class UsersService {
         );
       // }
       // console.log('cache hit');
-      return of(JSON.parse(localStorage.getItem('cachedUserPosts' + userId)!));
+      // return of(JSON.parse(localStorage.getItem('cachedUserPosts' + userId)!));
     }
 
     // caching post comments

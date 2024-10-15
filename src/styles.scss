@@ -35,3 +35,10 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #c5c4c4;
 }
+
+// rtl styles
+[dir="rtl"] {
+  a {
+    text-align: start;
+  }
+}

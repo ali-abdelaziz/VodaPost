@@ -1,5 +1,5 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
-import { NavbarComponent } from "../../shared/navbar/navbar.component";
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '../../services/users.service';
@@ -11,9 +11,16 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, NavbarComponent, RouterOutlet, CommonModule, SharedModule, TranslateModule],
+  imports: [
+    NavbarComponent,
+    NavbarComponent,
+    RouterOutlet,
+    CommonModule,
+    SharedModule,
+    TranslateModule,
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   showComments: boolean = false;
@@ -30,19 +37,19 @@ export class HomeComponent implements OnInit {
     private spinnerService: SpinnerService
   ) {
 
-   }
+  }
   ngOnInit(): void {
     this.getCachedUserPosts(this.userId);
     this.route.params.subscribe((params) => {
-      params['id'] ? this.userId = params['id'] : this.userId = 1
+      params['id'] ? (this.userId = params['id']) : (this.userId = 1);
       const userPosts = localStorage.getItem('cachedUserPosts' + this.userId);
       userPosts ? JSON.parse(userPosts) : [];
-      if (!userPosts) {
-      this.getCachedUserPosts(this.userId );
-      }
-    })
+      // if (userPosts?.length) {
+      this.getCachedUserPosts(this.userId);
+      // }
+    });
     this.postId = this.route.snapshot.params['postId'];
-    console.log(this.userId);
+    // console.log(this.userId);
   }
 
   // getting cached userPosts from local storage
@@ -50,10 +57,11 @@ export class HomeComponent implements OnInit {
     if (userId) {
     this.usersService.getCachedUserPosts(userId)
     .subscribe((posts) => {
+      console.log({ userId:userId, posts:posts });
       this.spinnerService.busy();
       this.userPosts.set(posts);
       this.spinnerService.idle();
-    })
+    });
   }
   }
 
@@ -64,12 +72,11 @@ export class HomeComponent implements OnInit {
       this.spinnerService.busy();
       this.postComments.set(comments);
       this.spinnerService.idle();
-    })
+    });
   }
 
   showPostComments(postId: number) {
     this.showComments = !this.showComments;
     this.getCachedPostComments(postId);
   }
-
 }

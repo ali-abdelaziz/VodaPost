@@ -11,7 +11,7 @@
         <div class="d-flex align-items-center mb-2">
           <img src="assets/images/posts/post_bg.jpg" alt="User Image" class="rounded-circle" width="40"
               height="40">
-          <h5 class="card-title ms-2 mb-0">{{post?.title | titlecase | truncate : 10}}</h5>
+          <h5 class="card-title mx-2 mb-0">{{post?.title | titlecase | truncate : 10}}</h5>
         </div>
 
         <p class="card-text first-letter">{{post?.body | truncate : 130}}</p>
@@ -21,7 +21,7 @@
           <div *ngIf="comment?.postId == post?.id" class="d-flex align-items-center mb-2">
             <img src="assets/images/posts/post_bg.jpg" alt="Commenter Image" class="rounded-circle" width="40"
               height="40">
-            <p class="first-letter ms-2 mb-0 fw-normal text-body-secondary fs-6">{{comment?.name}}</p>
+            <p class="first-letter mx-2 mb-0 fw-normal text-body-secondary fs-6">{{comment?.name}}</p>
           </div>
         }
       </div>
